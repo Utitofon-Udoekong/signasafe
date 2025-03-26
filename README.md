@@ -6,10 +6,138 @@
 ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)
 
-# Venn Custom Detector boilerplate
-A boilerplate for getting started with Venn as a Security Provider. Use is as a starting point to build your own custom detectors on Venn Network.
+# Venn Phishing Custom Detector
 
-> 📚 [What is Venn?](https://docs.venn.build/)
+A sophisticated phishing detection service for the Venn Network that helps protect users from malicious transactions originating from fake dApp interfaces.
+
+## Features
+
+- **Transaction Analysis**
+  - Value transfer monitoring
+  - Gas price anomaly detection
+  - Function signature verification
+  - Contract interaction analysis
+
+- **Contract Verification**
+  - Etherscan integration for contract verification
+  - Source code analysis for verified contracts
+  - Caching mechanism for API responses
+  - Support for both mainnet and testnet
+
+- **Vulnerability Detection**
+  - Reentrancy attacks
+  - Front-running attacks
+  - Integer overflow/underflow
+  - Access control vulnerabilities
+  - Timestamp manipulation
+  - Unchecked external calls
+  - Delegatecall injection
+  - Assembly code usage
+  - Dangerous opcodes
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/venn-phishing-detector.git
+cd venn-phishing-detector
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env
+```
+Edit `.env` and add your Etherscan API key:
+```
+ETHERSCAN_API_KEY=your_api_key_here
+NETWORK_TYPE=mainnet  # or testnet
+```
+
+## Usage
+
+The detector can be used as part of the Venn Network's security infrastructure:
+
+```typescript
+import { DetectionService } from './modules/detection-module/service'
+import { DetectionRequest } from './modules/detection-module/dtos'
+
+const request = new DetectionRequest()
+request.trace = {
+    to: '0x...',
+    from: '0x...',
+    value: '0x...',
+    gas: '0x...',
+    gasUsed: '0x...',
+    input: '0x...',
+    pre: {},
+    post: {},
+    calls: []
+}
+
+const response = await DetectionService.detect(request)
+console.log(response.detected, response.message)
+```
+
+## Detection Capabilities
+
+### Transaction Analysis
+- Monitors for unusual value transfers
+- Detects suspicious gas prices
+- Verifies function signatures
+- Analyzes contract interactions
+
+### Contract Verification
+- Checks contract verification status on Etherscan
+- Analyzes verified contract source code
+- Implements caching for API responses
+- Supports multiple networks
+
+### Vulnerability Detection
+- **Reentrancy**: Detects potential reentrancy attack patterns
+- **Front-running**: Identifies front-running attack vectors
+- **Integer Overflow/Underflow**: Checks for unsafe arithmetic operations
+- **Access Control**: Identifies potential access control vulnerabilities
+- **Timestamp Manipulation**: Detects timestamp-dependent code
+- **External Calls**: Identifies unchecked external calls
+- **Delegatecall Injection**: Detects potential delegatecall vulnerabilities
+- **Assembly Code**: Identifies use of inline assembly
+- **Dangerous Opcodes**: Detects use of potentially dangerous EVM opcodes
+
+## Testing
+
+Run the test suite:
+```bash
+npm test
+```
+
+The test suite includes:
+- Unit tests for all detection features
+- Mocked Etherscan service
+- Tests for various vulnerability patterns
+- Error handling tests
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Venn Network](https://venn.network/) for providing the platform
+- [Etherscan](https://etherscan.io/) for their API
+- All contributors who have helped improve this detector
 
 ## Table of Contents
 - [Introduction](#venn-custom-detector-boilerplate)
